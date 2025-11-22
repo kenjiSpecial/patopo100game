@@ -1,6 +1,26 @@
-# OpenNext Starter
+# patopo100game
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+### プロジェクト概要
+
+- **目的**: Next.js（TypeScript）を使って、スマホ向けの小さなゲームを100本制作する
+
+- **方針**:
+
+  - 1日あたり **最大3本** を目標に、小粒でシンプルなゲームを量産する
+
+  - 2D/3Dにはこだわらず、そのとき作りやすい表現を選ぶ
+
+  - `idea/100GameIdeaStock.md` でアイデア管理、`projects/` 配下で各ゲームの企画・記録を管理する
+
+- **現在着手中のゲーム**:
+
+  - ライトが光ったら止めろゲーム
+
+  - 上か下かを瞬時に選ぶゲーム
+
+  - どっちの扉？運試しゲーム
 
 ## Getting Started
 
