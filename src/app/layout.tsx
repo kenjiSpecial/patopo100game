@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,7 +28,28 @@ export default function RootLayout({
 			<head>
 				<link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
 			</head>
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+				{/* Google Analytics */}
+				<Script
+					src="https://www.googletagmanager.com/gtag/js?id=G-GKH3EJ4P62"
+					strategy="afterInteractive"
+				/>
+				<Script id="google-analytics" strategy="afterInteractive">
+					{`
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+						gtag('config', 'G-GKH3EJ4P62');
+					`}
+				</Script>
+				{/* Cloudflare Web Analytics */}
+				<Script
+					src="https://static.cloudflareinsights.com/beacon.min.js"
+					strategy="afterInteractive"
+					data-cf-beacon='{"token": "8c2bd15bcacd4634ae75f1e1409a60c7"}'
+				/>
+				{children}
+			</body>
 		</html>
 	);
 }
