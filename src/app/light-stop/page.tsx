@@ -308,28 +308,29 @@ export default function LightStopGame() {
       {/* メイン: ライト */}
       <div className="flex-1 flex flex-col items-center justify-center w-full relative">
 
-        {/* ゲージ風の装飾（回転アニメーション） */}
-        {gameState === "waiting" && (
-          <div className="absolute w-80 h-80 rounded-full border-4 border-t-transparent border-gray-600 animate-spin opacity-20 pointer-events-none" />
-        )}
-
         {/* 信号機コンテナ */}
         <div className="bg-gray-900 p-6 rounded-[3rem] border-4 border-gray-700 shadow-2xl flex flex-col gap-6 relative z-10">
 
           {/* 赤ライト (上) */}
-          <div
-            className={`w-32 h-32 rounded-full transition-all duration-100 flex items-center justify-center border-4 border-black/30
-              ${gameState === "waiting" || gameState === "idle" || gameState === "failure"
-                ? "bg-red-500 shadow-[0_0_50px_rgba(239,68,68,0.6)]"
-                : "bg-red-900/30 opacity-50"
-              }
-              ${gameState === "waiting" ? "animate-[heartbeat_1s_ease-in-out_infinite]" : ""}
-            `}
-          >
-            {(gameState === "failure" || gameState === "waiting") && (
-               <div className={`absolute inset-0 rounded-full bg-red-500/20 ${gameState === "waiting" ? "animate-ping" : ""}`} />
+          <div className="relative flex items-center justify-center">
+            {/* 待機中の変化予兆アニメーション（ミニマム） */}
+            {gameState === "waiting" && (
+              <>
+                <div className="absolute w-36 h-36 rounded-full border border-red-400/30 animate-pulse" />
+                <div className="absolute w-40 h-40 rounded-full border border-red-400/20 animate-pulse" style={{ animationDelay: '0.5s' }} />
+              </>
             )}
-             {gameState === "failure" && <span className="text-white font-bold text-4xl z-10">×</span>}
+            <div
+              className={`w-32 h-32 rounded-full transition-all duration-100 flex items-center justify-center border-4 border-black/30 relative z-10
+                ${gameState === "waiting" || gameState === "idle" || gameState === "failure"
+                  ? "bg-red-500 shadow-[0_0_50px_rgba(239,68,68,0.6)]"
+                  : "bg-red-900/30 opacity-50"
+                }
+                ${gameState === "waiting" ? "animate-[heartbeat_1s_ease-in-out_infinite]" : ""}
+              `}
+            >
+              {gameState === "failure" && <span className="text-white font-bold text-4xl z-10">×</span>}
+            </div>
           </div>
 
           {/* 緑ライト (下) */}
