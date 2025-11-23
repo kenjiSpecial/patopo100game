@@ -43,11 +43,13 @@ export default function RootLayout({
 					`}
 				</Script>
 				{/* Cloudflare Web Analytics */}
-				<Script
-					src="https://static.cloudflareinsights.com/beacon.min.js"
-					strategy="afterInteractive"
-					data-cf-beacon='{"token": "8c2bd15bcacd4634ae75f1e1409a60c7"}'
-				/>
+				{process.env.NODE_ENV === 'production' && (
+					<Script
+						src="https://static.cloudflareinsights.com/beacon.min.js"
+						strategy="afterInteractive"
+						data-cf-beacon='{"token": "8c2bd15bcacd4634ae75f1e1409a60c7"}'
+					/>
+				)}
 				{children}
 			</body>
 		</html>
