@@ -25,6 +25,7 @@ export const useGameLogic = (particleLayerRef: React.RefObject<ParticleLayerHand
   const gameStateRef = useRef<GameState>('start');
   const blocksRef = useRef<Block[]>([]);
   const comboRef = useRef(0);
+  const freezeTimeRef = useRef<number>(0); // ヒットストップ終了時刻
 
   const { playSound } = useSound();
 
@@ -89,15 +90,23 @@ export const useGameLogic = (particleLayerRef: React.RefObject<ParticleLayerHand
     ]);
   }, []);
 
-  const createExplosion = useCallback((x: number, y: number, type: 'success' | 'miss') => {
+  const createExplosion = useCallback((x: number, y: number, type: 'success' | 'miss', combo?: number) => {
     if (particleLayerRef.current) {
-      particleLayerRef.current.createExplosion(x, y, type);
+      particleLayerRef.current.createExplosion(x, y, type, combo);
     }
   }, [particleLayerRef]);
 
   const gameLoop = useCallback((timestamp: number) => {
     // gameStateRefを使って最新の状態をチェック
     if (gameStateRef.current === 'gameover' || gameStateRef.current === 'countdown') {
+      return;
+    }
+
+    // ヒットストップ中は更新をスキップ
+    if (timestamp < freezeTimeRef.current) {
+      // 時間が止まっているため、lastTimeRefも更新して、再開時に時間が飛ばないようにする
+      lastTimeRef.current = timestamp;
+      animationFrameRef.current = requestAnimationFrame(gameLoop);
       return;
     }
 
@@ -154,9 +163,14 @@ export const useGameLogic = (particleLayerRef: React.RefObject<ParticleLayerHand
 
         if (isMiss) {
           missIncrement++;
-          createExplosion(screenX, screenY, 'miss');
+          createExplosion(screenX, screenY, 'miss', comboRef.current); // コンボ数を渡す
+          // ミス時は少し長めのヒットストップで「しまった！」感を出す
+          freezeTimeRef.current = performance.now() + 300;
         } else {
-          createExplosion(screenX, screenY, 'success');
+          createExplosion(screenX, screenY, 'success', comboRef.current); // コンボ数を渡す
+          // 成功時は短めのヒットストップで「心地よい引っかかり」を出す
+          // コンボ中はリズムを崩さないよう短めに
+          freezeTimeRef.current = performance.now() + (comboRef.current > 5 ? 80 : 150);
         }
 
         const newStatus: 'miss' | 'success' = isMiss ? 'miss' : 'success';

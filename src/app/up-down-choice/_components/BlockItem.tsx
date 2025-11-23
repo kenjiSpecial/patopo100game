@@ -1,20 +1,37 @@
 import React from 'react';
 import { Block } from '../types';
-import { BLOCK_SIZE } from '../constants';
+import { BLOCK_SIZE, ZONE_HEIGHT } from '../constants';
 
 type Props = {
   block: Block;
 };
 
 export const BlockItem: React.FC<Props> = ({ block }) => {
-  const top =`${Math.round(block.y)}%`;
+  const top = `${Math.round(block.y)}%`;
+
+  // リスク演出：判定ラインに近づくと赤みが増し、振動する
+  const isNearDanger = block.status === 'falling' && block.y > 100 - ZONE_HEIGHT - 15; // 判定ライン手前15%から
+  const dangerLevel = isNearDanger ? (block.y - (100 - ZONE_HEIGHT - 15)) / 15 : 0; // 0.0 ~ 1.0
+
+  const dangerStyle = isNearDanger ? {
+    boxShadow: `0 0 ${dangerLevel * 30}px rgba(255, 0, 0, ${dangerLevel})`,
+    borderColor: `rgba(255, ${255 * (1 - dangerLevel)}, ${255 * (1 - dangerLevel)}, 1)`,
+    transform: `translateX(calc(-50% + ${(Math.random() - 0.5) * dangerLevel * 5}px))` // 軽微な振動
+  } : {};
+
+  // 判定時の拡大アニメーション用のクラス
+  const resultAnimationClass = block.status === 'success'
+    ? 'animate-pop-success'
+    : block.status === 'miss'
+      ? 'animate-pop-miss'
+      : '';
 
   return (
     <div
-      className={`absolute flex items-center justify-center rounded-xl shadow-lg transition-all duration-100 border-4
-        ${block.status === 'miss' ? 'bg-red-600 border-red-400 scale-95 opacity-50' :
-          block.status === 'success' ? 'bg-green-500 border-green-300 scale-125 opacity-0 translate-y-4' :
-          'bg-white border-slate-200 text-slate-900 shadow-[0_5px_15px_rgba(0,0,0,0.3)]'}
+      className={`absolute flex items-center justify-center rounded-xl transition-all duration-100 border-4
+        ${block.status === 'miss' ? `bg-red-600 border-red-400 opacity-50 ${resultAnimationClass}` :
+          block.status === 'success' ? `bg-green-500 border-green-300 opacity-0 ${resultAnimationClass}` :
+          'bg-white text-slate-900'}
       `}
       style={{
         left: block.x === 0 ? '50%' : block.x < 0 ? '25%' : '75%',
@@ -23,11 +40,13 @@ export const BlockItem: React.FC<Props> = ({ block }) => {
         height: 'auto',
         aspectRatio: '1/1',
         transform: 'translateX(-50%)',
-        opacity: block.status === 'success' ? 0 : block.y > 100 ? 0 : 1,
-        zIndex: 10
+        zIndex: 10,
+        ...dangerStyle
       }}
     >
-      <span className="text-3xl font-black font-mono tracking-tight">{block.value}</span>
+      <span className={`text-3xl font-black font-mono tracking-tight ${isNearDanger ? 'text-red-600' : ''}`}>
+        {block.value}
+      </span>
 
       {/* トレイル（簡易） */}
        {block.status === 'falling' && (
@@ -46,7 +65,24 @@ export const BlockItem: React.FC<Props> = ({ block }) => {
           {block.status === 'success' ? 'PERFECT!' : 'MISS!'}
         </div>
       )}
+      <style jsx>{`
+        @keyframes pop-success {
+          0% { transform: translateX(-50%) scale(1); opacity: 1; }
+          50% { transform: translateX(-50%) scale(1.4); opacity: 0.8; }
+          100% { transform: translateX(-50%) scale(2.0); opacity: 0; }
+        }
+        @keyframes pop-miss {
+          0% { transform: translateX(-50%) scale(1); opacity: 1; }
+          20% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+          100% { transform: translateX(-50%) scale(0.8); opacity: 0.5; }
+        }
+        .animate-pop-success {
+          animation: pop-success 0.3s ease-out forwards;
+        }
+        .animate-pop-miss {
+          animation: pop-miss 0.3s ease-out forwards;
+        }
+      `}</style>
     </div>
   );
 };
-
