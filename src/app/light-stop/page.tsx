@@ -247,11 +247,6 @@ export default function LightStopGame() {
     >
       <style>{animations}</style>
 
-      {/* フラッシュエフェクト */}
-      {gameState === "success" && (
-        <div className="absolute inset-0 bg-white pointer-events-none animate-[flash_0.3s_ease-out_forwards] z-50 opacity-0" />
-      )}
-
       {/* 待機中の背景鼓動エフェクト */}
       {gameState === "waiting" && (
         <div className="absolute inset-0 bg-black/20 pointer-events-none animate-[pulse_0.5s_ease-in-out_infinite]" />
