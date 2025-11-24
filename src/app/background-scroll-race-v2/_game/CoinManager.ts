@@ -33,7 +33,8 @@ export class CoinManager {
     if (gameState !== 'playing') return;
 
     const now = Date.now();
-    if (now - this.lastSpawnTime > 800) {
+    // Increase spawn rate by 5x (approx 480ms interval from previous 2400ms)
+    if (now - this.lastSpawnTime > 480) {
       if (Math.random() > 0.3) {
         this.spawnCoin(screenWidth, screenHeight, now);
       }

@@ -7,10 +7,10 @@ import { GameState } from '../types';
 
 export class RaceGame {
   public app: PIXI.Application;
-  private background: Background;
-  private car: Car;
-  private obstacleManager: ObstacleManager;
-  private coinManager: CoinManager;
+  private background!: Background;
+  private car!: Car;
+  private obstacleManager!: ObstacleManager;
+  private coinManager!: CoinManager;
 
   private gameState: GameState = 'title';
   private scrollSpeed: number = 0;
@@ -24,6 +24,7 @@ export class RaceGame {
 
   private isInitialized = false;
   private isDestroyed = false;
+  private speedTimer = 0;
 
   constructor(
     canvasContainer: HTMLElement,
@@ -73,14 +74,15 @@ export class RaceGame {
 
     // Start Loop
     this.app.ticker.add((ticker) => {
-        this.update(ticker.deltaTime);
+        this.update(ticker.deltaTime, ticker.elapsedMS);
     });
   }
 
   public startGame() {
     if (!this.isInitialized) return;
     this.gameState = 'playing';
-    this.scrollSpeed = 300;
+    this.scrollSpeed = 3000; // Initial speed back to 300
+    this.speedTimer = 0;
     this.obstacleManager.reset();
     this.coinManager.reset();
     // Reset car position if needed
@@ -105,8 +107,9 @@ export class RaceGame {
       this.onScoreUpdate(1);
   }
 
-  private update(delta: number) {
+  private update(delta: number, elapsedMS: number) {
     if (this.isDestroyed || !this.isInitialized || !this.background) return;
+
 
     this.background.update(delta, this.scrollSpeed);
     this.car.update(delta, this.gameState);

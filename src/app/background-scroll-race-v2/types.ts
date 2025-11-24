@@ -23,3 +23,4 @@ export interface GameScore {
   coins: number;
 }
 
+

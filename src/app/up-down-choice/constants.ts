@@ -7,3 +7,4 @@ export const INITIAL_SPEED = 0.25; // 速度
 export const SPAWN_INTERVAL_INITIAL = 1800; // ms
 
 
+

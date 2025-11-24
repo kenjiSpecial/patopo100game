@@ -37,3 +37,4 @@ export const GAME_CONFIG = {
   COIN_SPAWN_RATE: 45, // コイン生成頻度
 };
 
+

@@ -33,7 +33,7 @@ export class ObstacleManager {
     if (gameState !== 'playing') return;
 
     const now = Date.now();
-    if (now - this.lastSpawnTime > 1500) {
+    if (now - this.lastSpawnTime > 4500) { // Increased from 1500 to 4500 (1/3 rate)
       this.spawnObstacle(screenWidth, screenHeight, now);
       this.lastSpawnTime = now;
     }

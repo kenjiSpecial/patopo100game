@@ -72,3 +72,4 @@ export const GameUI = ({ gameState, score, onStart, onRetry }: GameUIProps) => {
   return null;
 };
 
+
