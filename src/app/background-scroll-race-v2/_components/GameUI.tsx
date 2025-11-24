@@ -22,8 +22,8 @@ export const GameUI = ({ gameState, score, onStart, onRetry }: GameUIProps) => {
   if (gameState === 'title') {
     return (
       <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm z-10">
-        <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-yellow-400 to-yellow-600 mb-8 tracking-tighter drop-shadow-lg text-center">
-          SCROLL RACE
+        <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-yellow-400 to-yellow-600 mb-8 tracking-tighter drop-shadow-lg text-center px-4">
+          BACKGROUND<br />SCROLL RACE V2
         </h1>
         <div className="bg-white/10 p-8 rounded-2xl backdrop-blur-md border border-white/10 flex flex-col items-center gap-6 max-w-sm w-full mx-4">
            <p className="text-gray-300 text-center mb-4">
