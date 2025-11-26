@@ -5,8 +5,8 @@ import { useSound } from './useSound';
 const GAME_CONFIG: GameConfig = {
   gravity: 0.6,
   jumpForce: 12,
-  initialSpeed: 20, // Increased 10x from original 5 (8 -> 50)
-  maxSpeed: 80, // Increased
+  initialSpeed: 10, // Reduced from 20
+  maxSpeed: 40, // Reduced
   acceleration: 0.0002,
   groundHeight: 50, // px
 };
@@ -15,7 +15,7 @@ const PLAYER_SIZE = 40;
 const OBSTACLE_WIDTH = 40;
 const OBSTACLE_HEIGHT_SMALL = 40;
 const OBSTACLE_HEIGHT_LARGE = 70;
-const PIT_WIDTH = 100; // Width of pit
+const PIT_WIDTH = 300; // Tripled from 100
 const COIN_SIZE = 30;
 const MAX_JUMPS = 3;
 
