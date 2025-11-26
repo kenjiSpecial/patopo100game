@@ -30,6 +30,30 @@ export default function Home() {
             <h2 className="text-2xl font-semibold mb-2">Light Stop</h2>
             <p className="text-gray-600 dark:text-gray-300">光を止める反射神経ゲーム</p>
           </Link>
+
+          <Link
+            href="/just-stop-zero"
+            className="block w-full p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-200 dark:border-gray-700"
+          >
+            <h2 className="text-2xl font-semibold mb-2">Just Stop Zero</h2>
+            <p className="text-gray-600 dark:text-gray-300">0.00秒ジャストを狙え！</p>
+          </Link>
+
+          <Link
+            href="/tap-jump-runner"
+            className="block w-full p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-200 dark:border-gray-700"
+          >
+            <h2 className="text-2xl font-semibold mb-2">Tap Jump Runner</h2>
+            <p className="text-gray-600 dark:text-gray-300">1タップでジャンプするだけランナー</p>
+          </Link>
+
+          <Link
+            href="/background-scroll-race-v2"
+            className="block w-full p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-200 dark:border-gray-700"
+          >
+            <h2 className="text-2xl font-semibold mb-2">Background Scroll Race V2</h2>
+            <p className="text-gray-600 dark:text-gray-300">障害物を避けてコインを集めろ！</p>
+          </Link>
         </div>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
