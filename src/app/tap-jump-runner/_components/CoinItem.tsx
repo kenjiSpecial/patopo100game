@@ -25,3 +25,4 @@ export const CoinItem: React.FC<CoinItemProps> = ({ coin }) => {
 
 
 
+

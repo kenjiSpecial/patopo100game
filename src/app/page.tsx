@@ -54,6 +54,14 @@ export default function Home() {
             <h2 className="text-2xl font-semibold mb-2">Background Scroll Race V2</h2>
             <p className="text-gray-600 dark:text-gray-300">障害物を避けてコインを集めろ！</p>
           </Link>
+
+          <Link
+            href="/reading-punch-boxing"
+            className="block w-full p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-200 dark:border-gray-700"
+          >
+            <h2 className="text-2xl font-semibold mb-2">Reading Punch Boxing</h2>
+            <p className="text-gray-600 dark:text-gray-300">パンチを読んで華麗にかわせ！</p>
+          </Link>
         </div>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">

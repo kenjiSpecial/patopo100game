@@ -16,3 +16,4 @@ export interface GameConfig {
   gameoverThreshold: number; // ゲームオーバー判定の閾値 (秒)
 }
 
+
