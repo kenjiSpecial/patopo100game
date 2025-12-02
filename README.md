@@ -14,13 +14,14 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
   - `idea/100GameIdeaStock.md` でアイデア管理、`projects/` 配下で各ゲームの企画・記録を管理する
 
-- **現在着手中のゲーム**:
+### ゲームリスト管理
 
-  - ライトが光ったら止めろゲーム
-
-  - 上か下かを瞬時に選ぶゲーム
-
-  - どっちの扉？運試しゲーム
+- **ファイル**: `src/app/games.json`
+- **表示**: トップページ（`src/app/page.tsx`）で自動的に読み込まれて表示される
+- **レイアウト**: PC・スマホともに2列表示
+- **追加ルール**:
+  - 新しいゲームを追加する際は、**配列の最初（インデックス0）に追加**すること
+  - 最新のゲームが一番上に表示されるようにする
 
 ## Getting Started
 
