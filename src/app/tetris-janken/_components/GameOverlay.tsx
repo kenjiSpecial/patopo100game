@@ -43,3 +43,4 @@ export const GameOverlay: React.FC<GameOverlayProps> = ({ gameState, score, onSt
   );
 };
 
+

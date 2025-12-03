@@ -77,3 +77,4 @@ export const BAD_BLOCKS: BlockType[] = ['Complex1', 'Complex2', 'Complex3']; // 
 export const JANKEN_INTERVAL = 3000; // CPU changes hand every 3 seconds
 export const TETRIS_TICK = 800; // Initial fall speed
 
+
