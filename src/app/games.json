@@ -1,5 +1,17 @@
 [
   {
+    "href": "/pull-tetris",
+    "title": "Pull Tetris",
+    "description": "引っ張って離してテトリス！",
+    "addedAt": "2025-12-04T10:10:00+09:00"
+  },
+  {
+    "href": "/tetris-aesthetic",
+    "title": "美しき塔 (Tetris Aesthetic Mode)",
+    "description": "ラインを消さずに美しく積み上げろ！シンメトリーと滑らかさを競う芸術的テトリス。",
+    "addedAt": "2025-12-04T10:00:00+09:00"
+  },
+  {
     "href": "/reading-punch-boxing",
     "title": "Reading Punch Boxing",
     "description": "パンチを読んで華麗にかわせ！",
